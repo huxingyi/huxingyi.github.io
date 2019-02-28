@@ -139,11 +139,11 @@ $(() => {
  var isLinux = navigator.platform.toUpperCase().indexOf('LINUX')!==-1;
  var downloadLink = "http://docs.dust3d.org/en/latest/install.html";
  if (isMac) {
-  downloadLink = "https://github.com/huxingyi/dust3d/releases/download/1.0.0-beta.14/dust3d-1.0.0-beta.14.dmg";
+  downloadLink = "http://docs.dust3d.org/en/latest/install.html";
  } else if (isWindows) {
-  downloadLink = "https://github.com/huxingyi/dust3d/releases/download/1.0.0-beta.14/dust3d-1.0.0-beta.14-x86.zip";
+  downloadLink = "http://docs.dust3d.org/en/latest/install.html";
  } else if (isLinux) {
-  downloadLink = "https://github.com/huxingyi/dust3d/releases/download/1.0.0-beta.14/dust3d-1.0.0-beta.14-x86_64.AppImage";
+  downloadLink = "http://docs.dust3d.org/en/latest/install.html";
  }
  $('a[href*="http://docs.dust3d.org/en/latest/install.html"]').attr("href", downloadLink);
 });
