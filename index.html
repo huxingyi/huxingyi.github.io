@@ -61,6 +61,11 @@ a:focus, a:hover {
   font-weight: bold;
 }
 
+a#joinMailingListLink {
+  color: #fc6621;
+  transition: color .235s ease-in-out;
+}
+
 /* Features */
 .sec-features .row:nth-of-type(n+2) {
   margin-top: 160px;
@@ -184,7 +189,7 @@ $(() => {
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="https://www.freelists.org/list/dust3d">Join Mailing List</a>
+                <a class="nav-link" id="joinMailingListLink" href="https://www.freelists.org/list/dust3d">Join Mailing List</a>
               </li>
             </ul>
           </div>
