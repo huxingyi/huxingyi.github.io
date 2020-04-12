@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <updates>
     <update for="MacOS,Linux,Win32"
-            version="1.0.0.35"
-            humanVersion="1.0.0-rc.5"
+            version="1.0.0.36"
+            humanVersion="1.0.0-rc.6"
             descriptionUrl="https://dust3d.org">
     </update>
 </updates>
