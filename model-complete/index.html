@@ -21,22 +21,89 @@
     h1 img {
         vertical-align: middle;
     }
-    h1,h2,h3,a {
+    h1, h2, h3, h4, a, table {
         font-size: 12px;
     }
-    h2, h3, p {
+    h2, h3, h4, p, table {
         margin-left: 10px;
     }
     img {
         max-width: 100%;
         height: auto;
     }
+    table tr td {
+        padding-right: 10px;
+    }
+    table {
+        border: 1px solid gray;
+    }
     </style>
 </head>
 <body>
     <h1><img src="../images/dust3d-icon-white.png" width="16" height="16" /> Dust3D - Model Complete (Draft)</h1>
-    <h2>Fruit - Banana</h2>
-        <h3>Key Steps</h3>
+    <h2>Shortcuts</h2>
+    <table>
+        <tr>
+            <th>Shortcut</th><th>Description</th>
+        </tr>
+        <tr>
+            <th colspan="2">Transformation</th>
+        </tr>
+        <tr>
+            <td><b>[</b> (Bracket Left)</td><td>Scale down (Distance between nodes)</td>
+        </tr>
+        <tr>
+            <td><b>]</b> (Bracket Right)</td><td>Scale up (Distance between nodes)</td>
+        </tr>
+        <tr>
+            <td><b>-</b> (Minus)</td><td>Scale down (Node radius)</td>
+        </tr>
+        <tr>
+            <td><b>=</b> (Equal)</td><td>Scale up (Node radius)</td>
+        </tr>
+        <tr>
+            <td><b>,</b> (Comma)</td><td>Rotate counterclockwise</td>
+        </tr>
+        <tr>
+            <td><b>.</b> (Period)</td><td>Rotate clockwise</td>
+        </tr>
+        <tr>
+            <th colspan="2">Movement</th>
+        </tr>
+        <tr>
+            <td><b>Left</b></td><td>Move to the left</td>
+        </tr>
+        <tr>
+            <td><b>Right</b></td><td>Move to the right</td>
+        </tr>
+        <tr>
+            <td><b>Up</b></td><td>Move upwards</td>
+        </tr>
+        <tr>
+            <td><b>Down</b></td><td>Move downwards</td>
+        </tr>
+        <tr>
+            <th colspan="2">Select</th>
+        </tr>
+        <tr>
+            <td><b>E</b></td><td>Switch selected profile from front to side, and side to front</td>
+        </tr>
+        <tr>
+            <td><b>F</b></td><td>Select hovered node's part on Parts list</td>
+        </tr>
+        <tr>
+            <td><b>H</b></td><td>Show/Hide selected nodes</td>
+        </tr>
+        <tr>
+            <th colspan="2">Render</th>
+        </tr>
+        <tr>
+            <td><b>W</b></td><td>Toggle wireframe</td>
+        </tr>
+    </table>
+    <h2>Examples</h2>
+    <h3>Fruit - Banana</h3>
+        <h4>Key Steps</h4>
         <p>
             <img src="examples/banana.png" width="360" height="192" />
         </p>
@@ -55,8 +122,8 @@
             <li><a href="examples/banana.ds3">banana.ds3</a></li>
         </ul>
     <hr />
-    <h2>Clothes - Hat</h2>
-        <h3>Key Steps</h3>
+    <h3>Clothes - Hat</h3>
+        <h4>Key Steps</h4>
         <p>
             <img src="examples/hat.png" width="360" height="192" />
         </p>
@@ -76,8 +143,8 @@
             <li><a href="examples/hat.ds3">hat.ds3</a></li>
         </ul>
     <hr />
-    <h2>Animals - Dog</h2>
-        <h3>Key Steps</h3>
+    <h3>Animals - Dog</h3>
+        <h4>Key Steps</h4>
         <p>
             <img src="examples/dog.png" width="360" height="192" />
         </p>
