@@ -273,6 +273,86 @@
       overflow: hidden;
     }
 
+    /* QUICK START */
+    .qs-section {
+      background: var(--bg-alt);
+      padding: 48px 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .qs-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .qs-title {
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--text);
+      margin: 0 0 28px 0;
+    }
+
+    .qs-title strong { font-weight: 600; }
+
+    .qs-platforms {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 768px) {
+      .qs-platforms { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    .qs-platform h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .qs-platform ol {
+      margin: 0 0 10px 0;
+      padding-left: 18px;
+    }
+
+    .qs-platform ol li {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 4px;
+    }
+
+    .qs-platform pre {
+      background: #1a1a1a;
+      color: #d4d0c9;
+      font-size: 11px;
+      border-radius: 3px;
+      padding: 10px 14px;
+      margin: 8px 0;
+      overflow-x: auto;
+    }
+
+    .qs-platform pre code { background: none; padding: 0; }
+
+    .qs-platform p.qs-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin: 4px 0 0 0;
+    }
+
+    .qs-models {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
     /* FOOTER */
     footer {
       background: var(--bg);
@@ -394,6 +474,7 @@
     </a>
     <nav class="topbar-nav">
       <a href="#what">Overview</a>
+      <a href="#quickstart">Quick Start</a>
       <a href="model-complete/index.html">Manual</a>
       <a href="https://github.com/huxingyi/dust3d">Source Code</a>
       <a href="https://www.freelists.org/list/dust3d">Mailing List</a>
@@ -409,6 +490,7 @@
     </button>
     <nav class="topbar-mobile-nav" id="topbar-mobile-nav">
       <a href="#what" onclick="document.getElementById('topbar-mobile-nav').classList.remove('open')">Overview</a>
+      <a href="#quickstart" onclick="document.getElementById('topbar-mobile-nav').classList.remove('open')">Quick Start</a>
       <a href="model-complete/index.html">Manual</a>
       <a href="https://github.com/huxingyi/dust3d">Source Code</a>
       <a href="https://www.freelists.org/list/dust3d">Mailing List</a>
@@ -430,13 +512,13 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
           <span>Windows</span>
         </a>
-        <a class="btn-platform" href="https://github.com/huxingyi/dust3d/releases/download/1.0.0/dust3d-1.0.0.AppImage" title="Download for Linux">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M2 3a1 1 0 00-1 1v16a1 1 0 001 1h20a1 1 0 001-1V4a1 1 0 00-1-1H2zm1 2h18v14H3V5zm2.293 2.293a1 1 0 000 1.414L7.586 11l-2.293 2.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 00-1.414 0zM11 14a1 1 0 000 2h6a1 1 0 000-2h-6z"/></svg>
-          <span>Linux</span>
-        </a>
         <a class="btn-platform" href="https://github.com/huxingyi/dust3d/releases/download/1.0.0/dust3d-1.0.0.dmg" title="Download for macOS">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
           <span>macOS</span>
+        </a>
+        <a class="btn-platform" href="https://github.com/huxingyi/dust3d/releases/download/1.0.0/dust3d-1.0.0.AppImage" title="Download for Linux">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M2 3a1 1 0 00-1 1v16a1 1 0 001 1h20a1 1 0 001-1V4a1 1 0 00-1-1H2zm1 2h18v14H3V5zm2.293 2.293a1 1 0 000 1.414L7.586 11l-2.293 2.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 00-1.414 0zM11 14a1 1 0 000 2h6a1 1 0 000-2h-6z"/></svg>
+          <span>Linux</span>
         </a>
         <a class="btn-secondary" href="https://github.com/huxingyi/dust3d">View on GitHub</a>
       </div>
@@ -466,6 +548,53 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- QUICK START -->
+  <section class="qs-section" id="quickstart">
+    <div class="qs-inner">
+      <h2 class="qs-title"><strong>Quick Start</strong></h2>
+      <div class="qs-platforms">
+
+        <div class="qs-platform">
+          <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+            Windows
+          </h3>
+          <ol>
+            <li><a href="https://github.com/huxingyi/dust3d/releases/download/1.0.0/dust3d-1.0.0.zip">Download the .zip</a> and extract it to any folder.</li>
+            <li>Run <code>dust3d.exe</code>. If Windows SmartScreen warns you, click <strong>More info → Run anyway</strong>.</li>
+          </ol>
+        </div>
+
+        <div class="qs-platform">
+          <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            macOS
+          </h3>
+          <ol>
+            <li><a href="https://github.com/huxingyi/dust3d/releases/download/1.0.0/dust3d-1.0.0.dmg">Download the .dmg</a>, open it, and drag <strong>Dust3D.app</strong> to Applications.</li>
+            <li>First launch will be blocked by Gatekeeper. Go to <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>. Alternatively, right-click the app in Finder and choose <strong>Open</strong>.</li>
+            <li>Requires Apple Silicon. Intel Macs are not supported by the pre-built binary.</li>
+          </ol>
+        </div>
+
+        <div class="qs-platform">
+          <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M2 3a1 1 0 00-1 1v16a1 1 0 001 1h20a1 1 0 001-1V4a1 1 0 00-1-1H2zm1 2h18v14H3V5zm2.293 2.293a1 1 0 000 1.414L7.586 11l-2.293 2.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 00-1.414 0zM11 14a1 1 0 000 2h6a1 1 0 000-2h-6z"/></svg>
+            Linux
+          </h3>
+          <ol>
+            <li><a href="https://github.com/huxingyi/dust3d/releases/download/1.0.0/dust3d-1.0.0.AppImage">Download the .AppImage</a>, then make it executable and run it:</li>
+          </ol>
+          <pre><code>chmod +x dust3d-*.AppImage
+./dust3d-*.AppImage</code></pre>
+          <p class="qs-note">If it fails, install FUSE: <code>sudo apt-get install libfuse2</code></p>
+        </div>
+
+      </div>
+      <p class="qs-models">Once Dust3D is running, try the <a href="https://github.com/huxingyi/dust3d-test-models" target="_blank">example .ds3 models</a> to get started quickly — open any file via <strong>File → Open</strong>.</p>
     </div>
   </section>
 
