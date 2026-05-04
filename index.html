@@ -1,77 +1,498 @@
-<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dust3D - Low Poly Modeling Tool</title>
+  <meta name="description" content="Dust3D is a free, open source low poly 3D modeling tool for video games and 3D printing. Features sketch-to-mesh, auto-rigging, procedural animation, and single-tool GLB/FBX export.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-  body {
-    font-family: 'Helvetica','Arial',sans-serif;
-    background-color: #f5f5f5;
-    font-size: 12px;
-    margin: 0;
-  }
-  h1 {
-    background-color: black;
-    color: white;
-    padding-left: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-  h1,h2,h3,a,td {
-    font-size: 12px;
-  }
-  h1 img {
-    vertical-align: middle;
-  }
-  h2, h3, p, table {
-    margin-left: 10px;
-  }
-  table tr td {
-    padding-right: 10px;
-  }
-  table {
-    border: 1px solid gray;
-  }
+    /* ── Color palette ── */
+    :root {
+      --bg:            #ffffff;
+      --bg-alt:        #f5f3ef;
+      --bg-dark:       #1a1a1a;
+      --text:          #1a1a1a;
+      --text-muted:    #6b6860;
+      --accent:        #aaebc4;
+      --accent-hover:  #88d9aa;
+      --border:        #e0ddd8;
+      --link:          #1a7bbf;
+      --link-hover:    #0f5a8c;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text);
+      background: var(--bg);
+      margin: 0;
+      padding: 0;
+      line-height: 1.5;
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
+
+    /* TOP BAR */
+    .topbar {
+      background: var(--bg-dark);
+      padding: 0 32px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: none;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .topbar-brand img { width: 16px; height: 16px; }
+
+    .topbar-brand span {
+      font-size: 12px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+    }
+
+    .topbar-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .topbar-nav a {
+      font-size: 12px;
+      color: #c8c5be;
+      text-decoration: none;
+    }
+
+    .topbar-nav a:hover { color: #ffffff; text-decoration: none; }
+
+    .topbar-cta {
+      color: #ffffff !important;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none !important;
+      border-bottom: 1px solid #ffffff;
+      padding-bottom: 1px;
+    }
+
+    .topbar-cta:hover { color: var(--accent) !important; border-color: var(--accent); text-decoration: none !important; }
+
+    /* BANNER */
+    .banner {
+      position: relative;
+      background: #0a0a0a;
+      padding: 64px 32px 56px;
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Rotated, scaled-down screenshot fills the right half */
+    .banner::before {
+      content: '';
+      position: absolute;
+      inset: -12% 3% -12% auto;
+      width: 66%;
+      background: url('images/banner-screenshot.png') center center / contain no-repeat;
+      transform: rotate(6deg) scale(0.82);
+      transform-origin: center center;
+      opacity: 0.92;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Gradient overlay so left text stays readable */
+    .banner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right,
+        rgba(10,10,10,1)    0%,
+        rgba(10,10,10,0.96) 30%,
+        rgba(10,10,10,0.6)  55%,
+        rgba(10,10,10,0.05) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .banner-inner {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .banner h1 {
+      font-size: 34px;
+      font-weight: 300;
+      color: #ffffff;
+      margin: 0 0 12px 0;
+      line-height: 1.15;
+      max-width: 520px;
+    }
+
+    .banner h1 strong { font-weight: 600; }
+
+    .banner-sub {
+      font-size: 15px;
+      color: #a0a0a0;
+      margin: 0 0 36px 0;
+      max-width: 480px;
+    }
+
+    .banner-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #1a1a1a;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--accent-hover); color: #1a1a1a; text-decoration: none; }
+
+    .btn-platform {
+      background: var(--accent);
+      color: #1a1a1a;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-platform:hover { background: var(--accent-hover); color: #1a1a1a; text-decoration: none; }
+
+    .btn-secondary {
+      background: transparent;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 400;
+      padding: 6px 14px;
+      border-radius: 2px;
+      border: 1px solid #555;
+      text-decoration: none;
+      transition: border-color 0.15s;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover { border-color: #aaa; color: #ffffff; text-decoration: none; }
+
+    /* WHAT'S DUST3D */
+    .what-section {
+      background: var(--bg);
+      padding: 48px 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .what-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .what-text h2 {
+      font-size: 26px;
+      font-weight: 300;
+      color: var(--text);
+      margin: 0 0 16px 0;
+    }
+
+    .what-text h2 strong { font-weight: 600; }
+
+    .what-text p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0 0 16px 0;
+      line-height: 1.7;
+    }
+
+    .what-text ul {
+      margin: 0 0 24px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .what-text ul li {
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 5px 0 5px 16px;
+      position: relative;
+    }
+
+    .what-text ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--text);
+      font-size: 10px;
+      top: 7px;
+    }
+
+    /* Video */
+    .what-media {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .video-main {
+      border-radius: 3px;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg);
+      padding: 32px 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .footer-brand .brand-icon { width: 20px; height: 20px; margin-bottom: 8px; display: block; filter: invert(1); }
+
+    .footer-brand p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin: 0;
+      max-width: 240px;
+      line-height: 1.6;
+    }
+
+    .footer-col h4 {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0 0 10px 0;
+    }
+
+    .footer-col ul { list-style: none; margin: 0; padding: 0; }
+    .footer-col ul li { margin-bottom: 7px; }
+
+    .footer-col ul li a {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-col ul li a:hover { color: var(--text); text-decoration: none; }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 24px auto 0;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-bottom p { font-size: 11px; color: var(--text-muted); margin: 0; }
+    .footer-bottom a { font-size: 11px; color: var(--text-muted); }
+    .footer-bottom a:hover { color: var(--text); }
+
+    /* HAMBURGER BUTTON */
+    .topbar-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .topbar-menu-btn span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: #c8c5be;
+      border-radius: 1px;
+      transition: background 0.2s;
+    }
+    .topbar-menu-btn:hover span { background: #ffffff; }
+
+    /* MOBILE DROPDOWN NAV */
+    .topbar-mobile-nav {
+      display: none;
+      position: absolute;
+      top: 28px;
+      right: 0;
+      left: 0;
+      background: #222;
+      z-index: 100;
+      padding: 8px 0;
+      border-top: 1px solid #333;
+    }
+    .topbar-mobile-nav a {
+      display: block;
+      padding: 10px 24px;
+      font-size: 13px;
+      color: #c8c5be;
+      text-decoration: none;
+    }
+    .topbar-mobile-nav a:hover { color: #ffffff; background: #333; }
+    .topbar-mobile-nav a.topbar-cta { color: var(--accent) !important; border: none; padding-bottom: 10px; }
+    .topbar-mobile-nav.open { display: block; }
+
+    @media (max-width: 768px) {
+      .topbar-nav { display: none; }
+      .topbar-menu-btn { display: flex; }
+      .topbar { position: relative; }
+      .banner h1 { font-size: 28px; }
+      .what-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-  <h1><img src="images/dust3d-icon-white.png" width="16" height="16" /> Dust3D - Low Poly Modeling Tool</h1>
-  <h2>Introduction</h2>
-  <p>
-    Dust3D is a cross-platform 3D modeling software that makes it easy to create low poly 3D models for video games, 3D printing, and more.
-  </p>
-  <h2>Download</h2>
-  <table>
-    <tr>
-      <td><a href="https://github.com/huxingyi/dust3d/releases/tag/1.0.0-rc.9"><b>1.0.0-rc.9<b></b></a></td>
-      <td><a href="https://github.com/huxingyi/dust3d/releases/download/1.0.0-rc.9/dust3d-1.0.0-rc.9.zip"><b>Windows</b></a></td>
-      <td><a href="https://github.com/huxingyi/dust3d/releases/download/1.0.0-rc.9/dust3d-1.0.0-rc.9.dmg"><b>MacOS</b></a></td>
-      <td><a href="https://github.com/huxingyi/dust3d/releases/download/1.0.0-rc.9/dust3d-1.0.0-rc.9.AppImage"><b>Linux</b></a></td>
-    </tr>
-    <tr>
-      <td>Latest build (GitHub master branch)</td>
-      <td><a href="download/dust3d-latest-preview.zip">Windows</a></td>
-      <td><a href="download/dust3d-latest-preview.dmg">MacOS</a></td>
-      <td><a href="download/dust3d-latest-preview.AppImage">Linux</a></td>
-    </tr>
-  </table>
-  <h2>Reference Manual</h2>
-  <ul>
-    <li><a href="model-complete/index.html">Dust3D - Model Complete (Draft)</a></li>
-  </ul>
-  <h2>Links</h2>
-  <ul>
-    <li><a href="https://www.freelists.org/list/dust3d">Mailing list</a></li>
-    <li><a href="https://github.com/huxingyi/dust3d">Source code</a></li>
-  </ul>
-  <h2>News</h2>
-  <ul>
-    <li><a href="https://console.substack.com/p/console-165" target="_blank">Interview with Console</a> 10/Jul/2023</li>
-  </ul>
-  <h2>License</h2>
-  <p>
-    Dust3D is licensed under the MIT License - see the <a href="https://github.com/huxingyi/dust3d/blob/master/LICENSE">LICENSE</a> file for details.
-  </p>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <a class="topbar-brand" href="/">
+      <img src="images/dust3d-icon-white.png" alt="Dust3D" />
+    </a>
+    <nav class="topbar-nav">
+      <a href="#what">Overview</a>
+      <a href="model-complete/index.html">Manual</a>
+      <a href="https://github.com/huxingyi/dust3d">Source Code</a>
+      <a href="https://www.freelists.org/list/dust3d">Mailing List</a>
+      <a href="https://fund.dust3d.org" target="_blank">Fund</a>
+      <a class="topbar-cta" href="https://github.com/huxingyi/dust3d/releases/latest">Download</a>
+    </nav>
+    <button class="topbar-menu-btn" aria-label="Open menu" aria-expanded="false" onclick="(function(btn){
+      var nav = document.getElementById('topbar-mobile-nav');
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    })(this)">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="topbar-mobile-nav" id="topbar-mobile-nav">
+      <a href="#what" onclick="document.getElementById('topbar-mobile-nav').classList.remove('open')">Overview</a>
+      <a href="model-complete/index.html">Manual</a>
+      <a href="https://github.com/huxingyi/dust3d">Source Code</a>
+      <a href="https://www.freelists.org/list/dust3d">Mailing List</a>
+      <a href="https://fund.dust3d.org" target="_blank">Fund</a>
+      <a class="topbar-cta" href="https://github.com/huxingyi/dust3d/releases/latest">Download</a>
+    </nav>
+  </header>
+
+  <!-- BANNER -->
+  <section class="banner">
+    <div class="banner-inner">
+      <h1>Low poly 3D modeling,<br><strong>made simple.</strong></h1>
+      <p class="banner-sub">
+        Cross-platform 3D modeling software for video games, 3D printing, and more &mdash;
+        free and open source.
+      </p>
+      <div class="banner-actions">
+        <a class="btn-platform" href="https://github.com/huxingyi/dust3d/releases/download/1.0.0/dust3d-1.0.0.zip" title="Download for Windows">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+          <span>Windows</span>
+        </a>
+        <a class="btn-platform" href="https://github.com/huxingyi/dust3d/releases/download/1.0.0/dust3d-1.0.0.AppImage" title="Download for Linux">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M2 3a1 1 0 00-1 1v16a1 1 0 001 1h20a1 1 0 001-1V4a1 1 0 00-1-1H2zm1 2h18v14H3V5zm2.293 2.293a1 1 0 000 1.414L7.586 11l-2.293 2.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 00-1.414 0zM11 14a1 1 0 000 2h6a1 1 0 000-2h-6z"/></svg>
+          <span>Linux</span>
+        </a>
+        <a class="btn-platform" href="https://github.com/huxingyi/dust3d/releases/download/1.0.0/dust3d-1.0.0.dmg" title="Download for macOS">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <span>macOS</span>
+        </a>
+        <a class="btn-secondary" href="https://github.com/huxingyi/dust3d">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S DUST3D -->
+  <section class="what-section" id="what">
+    <div class="what-inner">
+
+      <div class="what-text">
+        <h2><strong>What is Dust3D?</strong></h2>
+        <p>
+          Dust3D automates the tedious parts of 3D character creation — UV unwrapping, rigging, and animation. Sketch a skeleton on a 2D canvas, get a mesh in real time, assign bone names, tune animation parameters, and export.
+        </p>
+        <ul>
+          <li><strong>Sketch-to-mesh</strong> — draw nodes and edges on a 2D canvas; a 3D mesh generates in real time.</li>
+          <li><strong>Auto-rigging</strong> — label edges with bone names; Dust3D infers the skeleton and computes skin weights automatically.</li>
+          <li><strong>Procedural animation</strong> — walk, run, attack, idle, and death cycles generated per creature type; fully tweakable.</li>
+          <li><strong>Single-tool pipeline</strong> — UV unwrap, texture, rig, animate, and export GLB/FBX without leaving the app.</li>
+        </ul>
+      </div>
+
+      <div class="what-media">
+        <div class="video-main">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/9KZi9LRs3Iw" title="Dust3D overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="border-radius:3px;"></iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="brand-icon" src="images/dust3d-icon-white.png" alt="Dust3D" />
+        <div style="display:flex;align-items:center;gap:16px;margin-top:8px;">
+          <p style="margin:0;font-size:12px;color:var(--text-muted);line-height:1.6;">Dust3D is an open source low poly 3D modeling tool, released under the MIT License.</p>
+          <img src="images/Epic_MegaGrants_Recipient_logo.png" alt="Epic MegaGrants Recipient" style="height:64px;flex-shrink:0;" />
+        </div>
+      </div>
+
+
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Dust3D. Created and maintained by Jeremy Hu. Developed by <a href="https://github.com/huxingyi/dust3d/blob/master/AUTHORS" target="_blank">contributors</a>.</p>
+      <div style="display:flex;align-items:center;gap:20px;">
+        <a href="https://github.com/huxingyi/dust3d/blob/master/LICENSE" target="_blank">MIT License</a>
+        <a href="Branding_Dust3D_Logos.zip" download>Media Kit</a>
+        <a href="https://twitter.com/jeremyhu2016" target="_blank">Twitter</a>
+        <a href="https://www.youtube.com/@jeremyhu5559" target="_blank">YouTube</a>
+        <a href="https://github.com/huxingyi/dust3d">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>

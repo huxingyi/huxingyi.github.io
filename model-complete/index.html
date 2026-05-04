@@ -1,176 +1,454 @@
-<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dust3D - Model Complete (Draft)</title>
-    <style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dust3D - Reference Manual</title>
+  <meta name="description" content="Dust3D reference manual — keyboard shortcuts and step-by-step modeling examples including banana, hat, dog, and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ── Color palette ── */
+    :root {
+      --bg:            #ffffff;
+      --bg-alt:        #f5f3ef;
+      --bg-dark:       #1a1a1a;
+      --text:          #1a1a1a;
+      --text-muted:    #6b6860;
+      --accent:        #aaebc4;
+      --accent-hover:  #88d9aa;
+      --border:        #e0ddd8;
+      --link:          #1a7bbf;
+      --link-hover:    #0f5a8c;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
     body {
-        font-family: 'Helvetica','Arial',sans-serif;
-        background-color: #f5f5f5;
-        font-size: 12px;
-        margin: 0;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text);
+      background: var(--bg);
+      margin: 0;
+      padding: 0;
+      line-height: 1.5;
     }
-    h1 {
-        background-color: black;
-        color: white;
-        padding-left: 5px;
-        padding-top: 5px;
-        padding-bottom: 5px;
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
+
+    /* TOP BAR */
+    .topbar {
+      background: var(--bg-dark);
+      padding: 0 32px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    h1 img {
-        vertical-align: middle;
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
     }
-    h1, h2, h3, h4, a, table {
-        font-size: 12px;
+
+    .topbar-brand img { width: 16px; height: 16px; }
+
+    .topbar-brand span {
+      font-size: 12px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: 0.04em;
     }
-    h2, h3, h4, p, table {
-        margin-left: 10px;
+
+    .topbar-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
     }
-    img, table {
-        max-width: 100%;
-        height: auto;
+
+    .topbar-nav a {
+      font-size: 12px;
+      color: #c8c5be;
+      text-decoration: none;
     }
-    table tr td {
-        padding-right: 10px;
+
+    .topbar-nav a:hover { color: #ffffff; text-decoration: none; }
+
+    .topbar-cta {
+      color: #ffffff !important;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none !important;
+      border-bottom: 1px solid #ffffff;
+      padding-bottom: 1px;
     }
-    table {
-        border: 1px solid gray;
+
+    .topbar-cta:hover { color: var(--accent) !important; border-color: var(--accent); text-decoration: none !important; }
+
+    /* PAGE CONTENT */
+    .page-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 32px 64px;
     }
-    </style>
+
+    .page-inner h1 {
+      font-size: 26px;
+      font-weight: 300;
+      margin: 0 0 32px 0;
+      color: var(--text);
+    }
+
+    .page-inner h1 strong { font-weight: 600; }
+
+    .page-inner h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 40px 0 12px 0;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+
+    .page-inner h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 28px 0 8px 0;
+      color: var(--text);
+    }
+
+    .page-inner h4 {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 16px 0 8px 0;
+      color: var(--text-muted);
+    }
+
+    .page-inner p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0 0 12px 0;
+      line-height: 1.7;
+    }
+
+    .page-inner ol, .page-inner ul {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0 0 16px 0;
+      padding-left: 24px;
+      line-height: 1.8;
+    }
+
+    .page-inner img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      display: block;
+      margin: 12px 0;
+    }
+
+    .page-inner hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 32px 0;
+    }
+
+    .page-inner em { color: var(--text-muted); font-size: 13px; }
+
+    /* Shortcuts table */
+    .page-inner table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 560px;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .page-inner table th,
+    .page-inner table td {
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      text-align: left;
+    }
+
+    .page-inner table th {
+      background: var(--bg-alt);
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .page-inner table td { color: var(--text-muted); }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg);
+      padding: 32px 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .footer-brand .brand-icon { width: 20px; height: 20px; margin-bottom: 8px; display: block; filter: invert(1); }
+
+    .footer-bottom {
+      max-width: 860px;
+      margin: 24px auto 0;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-bottom p { font-size: 11px; color: var(--text-muted); margin: 0; }
+    .footer-bottom a { font-size: 11px; color: var(--text-muted); }
+    .footer-bottom a:hover { color: var(--text); }
+
+    /* HAMBURGER BUTTON */
+    .topbar-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .topbar-menu-btn span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: #c8c5be;
+      border-radius: 1px;
+      transition: background 0.2s;
+    }
+    .topbar-menu-btn:hover span { background: #ffffff; }
+
+    /* MOBILE DROPDOWN NAV */
+    .topbar-mobile-nav {
+      display: none;
+      position: absolute;
+      top: 28px;
+      right: 0;
+      left: 0;
+      background: #222;
+      z-index: 100;
+      padding: 8px 0;
+      border-top: 1px solid #333;
+    }
+    .topbar-mobile-nav a {
+      display: block;
+      padding: 10px 24px;
+      font-size: 13px;
+      color: #c8c5be;
+      text-decoration: none;
+    }
+    .topbar-mobile-nav a:hover { color: #ffffff; background: #333; }
+    .topbar-mobile-nav a.topbar-cta { color: var(--accent) !important; border: none; padding-bottom: 10px; }
+    .topbar-mobile-nav.open { display: block; }
+
+    @media (max-width: 768px) {
+      .topbar-nav { display: none; }
+      .topbar-menu-btn { display: flex; }
+      .topbar { position: relative; }
+      .page-inner { padding: 32px 20px 48px; }
+    }
+  </style>
 </head>
 <body>
-    <h1><img src="../images/dust3d-icon-white.png" width="16" height="16" /> Dust3D - Model Complete (Draft)</h1>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <a class="topbar-brand" href="/">
+      <img src="../images/dust3d-icon-white.png" alt="Dust3D" />
+    </a>
+    <nav class="topbar-nav">
+      <a href="/#what">Overview</a>
+      <a href="/model-complete/index.html">Manual</a>
+      <a href="https://github.com/huxingyi/dust3d">Source Code</a>
+      <a href="https://www.freelists.org/list/dust3d">Mailing List</a>
+      <a href="https://fund.dust3d.org" target="_blank">Fund</a>
+      <a class="topbar-cta" href="https://github.com/huxingyi/dust3d/releases/latest">Download</a>
+    </nav>
+    <button class="topbar-menu-btn" aria-label="Open menu" aria-expanded="false" onclick="(function(btn){
+      var nav = document.getElementById('topbar-mobile-nav');
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    })(this)">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="topbar-mobile-nav" id="topbar-mobile-nav">
+      <a href="/#what">Overview</a>
+      <a href="/model-complete/index.html">Manual</a>
+      <a href="https://github.com/huxingyi/dust3d">Source Code</a>
+      <a href="https://www.freelists.org/list/dust3d">Mailing List</a>
+      <a href="https://fund.dust3d.org" target="_blank">Fund</a>
+      <a class="topbar-cta" href="https://github.com/huxingyi/dust3d/releases/latest">Download</a>
+    </nav>
+  </header>
+
+  <div class="page-inner">
+    <h1><strong>Dust3D</strong> &mdash; Reference Manual</h1>
     <h2>Shortcuts</h2>
     <table>
-        <tr>
-            <th>Shortcut</th><th>Description</th>
-        </tr>
-        <tr>
-            <th colspan="2">Transformation</th>
-        </tr>
-        <tr>
-            <td><b>[</b> (Bracket Left)</td><td>Scale down (Distance between nodes)</td>
-        </tr>
-        <tr>
-            <td><b>]</b> (Bracket Right)</td><td>Scale up (Distance between nodes)</td>
-        </tr>
-        <tr>
-            <td><b>-</b> (Minus)</td><td>Scale down (Node radius)</td>
-        </tr>
-        <tr>
-            <td><b>=</b> (Equal)</td><td>Scale up (Node radius)</td>
-        </tr>
-        <tr>
-            <td><b>,</b> (Comma)</td><td>Rotate counterclockwise</td>
-        </tr>
-        <tr>
-            <td><b>.</b> (Period)</td><td>Rotate clockwise</td>
-        </tr>
-        <tr>
-            <th colspan="2">Movement</th>
-        </tr>
-        <tr>
-            <td><b>Left</b></td><td>Move to the left</td>
-        </tr>
-        <tr>
-            <td><b>Right</b></td><td>Move to the right</td>
-        </tr>
-        <tr>
-            <td><b>Up</b></td><td>Move upwards</td>
-        </tr>
-        <tr>
-            <td><b>Down</b></td><td>Move downwards</td>
-        </tr>
-        <tr>
-            <th colspan="2">Select</th>
-        </tr>
-        <tr>
-            <td><b>E</b></td><td>Switch selected profile from front to side, and side to front</td>
-        </tr>
-        <tr>
-            <td><b>F</b></td><td>Select hovered node's part on Parts list</td>
-        </tr>
-        <tr>
-            <td><b>H</b></td><td>Show/Hide selected nodes</td>
-        </tr>
-        <tr>
-            <th colspan="2">Render</th>
-        </tr>
-        <tr>
-            <td><b>W</b></td><td>Toggle wireframe</td>
-        </tr>
+      <tr>
+        <th>Shortcut</th><th>Description</th>
+      </tr>
+      <tr>
+        <th colspan="2">Transformation</th>
+      </tr>
+      <tr>
+        <td><b>[</b> (Bracket Left)</td><td>Scale down (Distance between nodes)</td>
+      </tr>
+      <tr>
+        <td><b>]</b> (Bracket Right)</td><td>Scale up (Distance between nodes)</td>
+      </tr>
+      <tr>
+        <td><b>-</b> (Minus)</td><td>Scale down (Node radius)</td>
+      </tr>
+      <tr>
+        <td><b>=</b> (Equal)</td><td>Scale up (Node radius)</td>
+      </tr>
+      <tr>
+        <td><b>,</b> (Comma)</td><td>Rotate counterclockwise</td>
+      </tr>
+      <tr>
+        <td><b>.</b> (Period)</td><td>Rotate clockwise</td>
+      </tr>
+      <tr>
+        <th colspan="2">Movement</th>
+      </tr>
+      <tr>
+        <td><b>Left</b></td><td>Move to the left</td>
+      </tr>
+      <tr>
+        <td><b>Right</b></td><td>Move to the right</td>
+      </tr>
+      <tr>
+        <td><b>Up</b></td><td>Move upwards</td>
+      </tr>
+      <tr>
+        <td><b>Down</b></td><td>Move downwards</td>
+      </tr>
+      <tr>
+        <th colspan="2">Select</th>
+      </tr>
+      <tr>
+        <td><b>E</b></td><td>Switch selected profile from front to side, and side to front</td>
+      </tr>
+      <tr>
+        <td><b>F</b></td><td>Select hovered node's part on Parts list</td>
+      </tr>
+      <tr>
+        <td><b>H</b></td><td>Show/Hide selected nodes</td>
+      </tr>
+      <tr>
+        <th colspan="2">Render</th>
+      </tr>
+      <tr>
+        <td><b>W</b></td><td>Toggle wireframe</td>
+      </tr>
     </table>
+
     <h2>Examples</h2>
-    <h3>Fruit - Banana</h3>
-        <h4>Key Steps</h4>
-        <p>
-            <img src="examples/banana.png" width="360" height="192" />
-        </p>
-        <p>
-        <ol>
-            <li>Draw four nodes on canvas in circle</li>
-            <li>Right click on the part from Parts list, then choose Convert to Cut Face</li>
-            <li>Draw several nodes on canvas in a tube shape</li>
-            <li>Double click the tube shape to select it in Parts list</li>
-            <li>Click the configure properties icon from Parts list</li>
-            <li>Select the Cut Face icon to fill the tube shape</li>
-        </ol>
-        </p>
-        <h3>Attachments</h3>
-        <ul>
-            <li><a href="examples/banana.ds3">banana.ds3</a></li>
-        </ul>
+
+    <h3>Fruit &mdash; Banana</h3>
+    <h4>Key Steps</h4>
+    <img src="examples/banana.png" width="360" height="192" alt="Banana example" />
+    <ol>
+      <li>Draw five nodes on canvas in circle</li>
+      <li>Right click on the part from Parts list, then choose Convert to Cut Face</li>
+      <li>Draw several nodes on canvas in a tube shape</li>
+      <li>Double click the tube shape to select it in Parts list</li>
+      <li>Click the configure properties icon from Parts list</li>
+      <li>Select the Cut Face icon to fill the tube shape</li>
+    </ol>
+    <h4>Attachments</h4>
+    <ul>
+      <li><a href="examples/banana.ds3">banana.ds3</a></li>
+    </ul>
+
     <hr />
-    <h3>Clothes - Hat</h3>
-        <h4>Key Steps</h4>
-        <p>
-            <img src="examples/hat.png" width="360" height="192" />
-        </p>
-        <p>
-        <ol>
-            <li>Draw five spines on canvas</li>
-            <li>Select all parts from Parts list</li>
-            <li>Right click and select Convert to Stitching Line</li>
-            <li>Right click again and select Make group</li>
-            <li>Click the configure properties icon from Parts list</li>
-            <li>Check box: Back closed</li>
-            <li>Update Target Segments: 7</li>
-        </ol>
-        </p>
-        <h3>Attachments</h3>
-        <ul>
-            <li><a href="examples/hat.ds3">hat.ds3</a></li>
-        </ul>
+
+    <h3>Clothes &mdash; Hat</h3>
+    <h4>Key Steps</h4>
+    <img src="examples/hat.png" width="360" height="192" alt="Hat example" />
+    <ol>
+      <li>Draw five spines on canvas</li>
+      <li>Select all parts from Parts list</li>
+      <li>Right click and select Convert to Stitching Line</li>
+      <li>Right click again and select Make group</li>
+      <li>Click the configure properties icon from Parts list</li>
+      <li>Check box: Back closed</li>
+      <li>Update Target Segments: 7</li>
+    </ol>
+    <h4>Attachments</h4>
+    <ul>
+      <li><a href="examples/hat.ds3">hat.ds3</a></li>
+    </ul>
+
     <hr />
-    <h3>Animals - Dog</h3>
-        <h4>Key Steps</h4>
-        <p>
-            <img src="examples/dog.png" width="360" height="192" />
-        </p>
-        <p>
-        <ol>
-            <li>Take a front photo of dog</li>
-            <li>Take a side view of dog</li>
-            <li>Menu: File >> Change Background Image... >> Select both front and side images</li>
-            <li>Draw nodes according to the background reference image</li>
-            <li>Select all parts from Parts list</li>
-            <li>Click the configure properties icon from Parts list</li>
-            <li>Choose texture image</li>
-        </ol>
-        </p>
-        <h3>Attachments</h3>
-        <ul>
-            <li><a href="examples/dog.ds3">dog.ds3</a></li>
-        </ul>
+
+    <h3>Animals &mdash; Dog</h3>
+    <h4>Key Steps</h4>
+    <img src="examples/dog.png" width="360" height="192" alt="Dog example" />
+    <ol>
+      <li>Take a front photo of dog</li>
+      <li>Take a side view of dog</li>
+      <li>Menu: File &raquo; Change Background Image&hellip; &raquo; Select both front and side images</li>
+      <li>Draw nodes according to the background reference image</li>
+      <li>Select all parts from Parts list</li>
+      <li>Click the configure properties icon from Parts list</li>
+      <li>Choose texture image</li>
+    </ol>
+    <h4>Attachments</h4>
+    <ul>
+      <li><a href="examples/dog.ds3">dog.ds3</a></li>
+    </ul>
+
     <hr />
+
     <h3>Others</h3>
-        <ul>
-            <li><a href="examples/fly.ds3">fly.ds3</a></li>
-            <li><a href="examples/knife.ds3">knife.ds3</a></li>
-            <li><a href="examples/screwdriver.ds3">screwdriver.ds3</a></li>
-        </ul>
-    <hr />
-    <I>To be continued</I>
+    <ul>
+      <li><a href="examples/fly.ds3">fly.ds3</a></li>
+      <li><a href="examples/knife.ds3">knife.ds3</a></li>
+      <li><a href="examples/screwdriver.ds3">screwdriver.ds3</a></li>
+    </ul>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="brand-icon" src="../images/dust3d-icon-white.png" alt="Dust3D" />
+        <div style="display:flex;align-items:center;gap:16px;margin-top:8px;">
+          <p style="margin:0;font-size:12px;color:var(--text-muted);line-height:1.6;max-width:240px;">Dust3D is an open source low poly 3D modeling tool, released under the MIT License.</p>
+          <img src="../images/Epic_MegaGrants_Recipient_logo.png" alt="Epic MegaGrants Recipient" style="height:64px;flex-shrink:0;" />
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Dust3D. Created and maintained by Jeremy Hu. Developed by <a href="https://github.com/huxingyi/dust3d/blob/master/AUTHORS" target="_blank">contributors</a>.</p>
+      <div style="display:flex;align-items:center;gap:20px;">
+        <a href="https://github.com/huxingyi/dust3d/blob/master/LICENSE" target="_blank">MIT License</a>
+        <a href="../Branding_Dust3D_Logos.zip" download>Media Kit</a>
+        <a href="https://twitter.com/jeremyhu2016" target="_blank">Twitter</a>
+        <a href="https://www.youtube.com/@jeremyhu5559" target="_blank">YouTube</a>
+        <a href="https://github.com/huxingyi/dust3d">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
