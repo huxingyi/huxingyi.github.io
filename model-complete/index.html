@@ -115,20 +115,6 @@
       padding-bottom: 6px;
     }
 
-    .page-inner h3 {
-      font-size: 15px;
-      font-weight: 600;
-      margin: 28px 0 8px 0;
-      color: var(--text);
-    }
-
-    .page-inner h4 {
-      font-size: 13px;
-      font-weight: 600;
-      margin: 16px 0 8px 0;
-      color: var(--text-muted);
-    }
-
     .page-inner p {
       font-size: 14px;
       color: var(--text-muted);
@@ -136,54 +122,147 @@
       line-height: 1.7;
     }
 
-    .page-inner ol, .page-inner ul {
-      font-size: 14px;
+    /* Cheatsheet */
+    .cheatsheet {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      font-size: 12px;
+    }
+
+    .cs-section {
+      display: grid;
+      grid-template-columns: 140px 1fr 140px 1fr;
+    }
+
+    .cs-section-label {
+      grid-column: 1 / -1;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--text-muted);
-      margin: 0 0 16px 0;
-      padding-left: 24px;
+      background: var(--border);
+      padding: 3px 10px;
+    }
+
+    .cs-row {
+      display: contents;
+    }
+
+    .cs-key, .cs-desc {
+      padding: 3px 10px;
+      border-top: 1px solid var(--border);
+      line-height: 1.5;
+    }
+
+    .cs-key {
+      color: var(--text);
+      font-weight: 500;
+      background: var(--bg-alt);
+      white-space: nowrap;
+    }
+
+    .cs-key kbd {
+      display: inline-block;
+      font-family: 'SF Mono', 'Consolas', 'Menlo', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 0 4px;
+      line-height: 18px;
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .cs-desc { color: var(--text-muted); }
+
+    /* single-col sections override the grid */
+    .cs-section.single {
+      grid-template-columns: 200px 1fr;
+    }
+
+    @media (max-width: 640px) {
+      .cs-section, .cs-section.single {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Examples */
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .ex-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      font-size: 12px;
+    }
+
+    .ex-card img {
+      display: block;
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+
+    .ex-body {
+      padding: 10px 12px 12px;
+    }
+
+    .ex-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 6px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .ex-steps {
+      margin: 0 0 8px 0;
+      padding-left: 16px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .ex-dl {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    .ex-dl a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .ex-dl a:hover { color: var(--link-hover); text-decoration: underline; }
+
+    .ex-others {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .ex-others ul {
+      margin: 4px 0 0;
+      padding-left: 16px;
       line-height: 1.8;
     }
 
-    .page-inner img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 3px;
-      border: 1px solid var(--border);
-      display: block;
-      margin: 12px 0;
-    }
-
-    .page-inner hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 32px 0;
-    }
-
-    .page-inner em { color: var(--text-muted); font-size: 13px; }
-
-    /* Shortcuts table */
-    .page-inner table {
-      border-collapse: collapse;
-      width: 100%;
-      max-width: 560px;
-      font-size: 13px;
-      margin-bottom: 16px;
-    }
-
-    .page-inner table th,
-    .page-inner table td {
-      border: 1px solid var(--border);
-      padding: 6px 12px;
-      text-align: left;
-    }
-
-    .page-inner table th {
-      background: var(--bg-alt);
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .page-inner table td { color: var(--text-muted); }
+    .ex-others a { color: var(--link); text-decoration: none; }
+    .ex-others a:hover { color: var(--link-hover); text-decoration: underline; }
 
     /* FOOTER */
     footer {
@@ -315,136 +394,187 @@
       </iframe>
     </div>
 
-    <h2>Shortcuts</h2>
-    <table>
-      <tr>
-        <th>Shortcut</th><th>Description</th>
-      </tr>
-      <tr>
-        <th colspan="2">Transformation</th>
-      </tr>
-      <tr>
-        <td><b>[</b> (Bracket Left)</td><td>Scale down (Distance between nodes)</td>
-      </tr>
-      <tr>
-        <td><b>]</b> (Bracket Right)</td><td>Scale up (Distance between nodes)</td>
-      </tr>
-      <tr>
-        <td><b>-</b> (Minus)</td><td>Scale down (Node radius)</td>
-      </tr>
-      <tr>
-        <td><b>=</b> (Equal)</td><td>Scale up (Node radius)</td>
-      </tr>
-      <tr>
-        <td><b>,</b> (Comma)</td><td>Rotate counterclockwise</td>
-      </tr>
-      <tr>
-        <td><b>.</b> (Period)</td><td>Rotate clockwise</td>
-      </tr>
-      <tr>
-        <th colspan="2">Movement</th>
-      </tr>
-      <tr>
-        <td><b>Left</b></td><td>Move to the left</td>
-      </tr>
-      <tr>
-        <td><b>Right</b></td><td>Move to the right</td>
-      </tr>
-      <tr>
-        <td><b>Up</b></td><td>Move upwards</td>
-      </tr>
-      <tr>
-        <td><b>Down</b></td><td>Move downwards</td>
-      </tr>
-      <tr>
-        <th colspan="2">Select</th>
-      </tr>
-      <tr>
-        <td><b>E</b></td><td>Switch selected profile from front to side, and side to front</td>
-      </tr>
-      <tr>
-        <td><b>F</b></td><td>Select hovered node's part on Parts list</td>
-      </tr>
-      <tr>
-        <td><b>H</b></td><td>Show/Hide selected nodes</td>
-      </tr>
-      <tr>
-        <th colspan="2">Render</th>
-      </tr>
-      <tr>
-        <td><b>W</b></td><td>Toggle wireframe</td>
-      </tr>
-    </table>
+    <h2>Keyboard Shortcuts</h2>
+
+    <div class="cheatsheet">
+
+      <!-- Shortcuts: 4-column two-per-row layout -->
+      <div class="cs-section">
+        <div class="cs-section-label">Edit</div>
+        <div class="cs-row"><span class="cs-key"><kbd>Ctrl</kbd>+<kbd>Z</kbd></span><span class="cs-desc">Undo</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> / <kbd>Y</kbd></span><span class="cs-desc">Redo</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Ctrl</kbd>+<kbd>A</kbd></span><span class="cs-desc">Select all</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Ctrl</kbd>+<kbd>X</kbd></span><span class="cs-desc">Cut selected</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Ctrl</kbd>+<kbd>C</kbd></span><span class="cs-desc">Copy selected</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Ctrl</kbd>+<kbd>V</kbd></span><span class="cs-desc">Paste</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Del</kbd> / <kbd>Backspace</kbd></span><span class="cs-desc">Delete selected</span></div>
+
+        <div class="cs-section-label">Transform</div>
+        <div class="cs-row"><span class="cs-key"><kbd>[</kbd> / <kbd>]</kbd></span><span class="cs-desc">Scale selected down / up</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>-</kbd> / <kbd>=</kbd></span><span class="cs-desc">Shrink / grow node radius</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Alt</kbd>+<kbd>-</kbd> / <kbd>=</kbd></span><span class="cs-desc">Zoom rendered model out / in</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>,</kbd> / <kbd>.</kbd></span><span class="cs-desc">Rotate CCW / CW</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>&uarr;</kbd> <kbd>&darr;</kbd></span><span class="cs-desc">Move selected nodes</span></div>
+
+        <div class="cs-section-label">Mode &amp; Display</div>
+        <div class="cs-row"><span class="cs-key"><kbd>A</kbd></span><span class="cs-desc">Switch to Add mode</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>S</kbd></span><span class="cs-desc">Switch to Select mode</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>W</kbd></span><span class="cs-desc">Toggle wireframe</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Space</kbd></span><span class="cs-desc">Show component property</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Esc</kbd></span><span class="cs-desc">Cancel / exit current mode</span></div>
+
+        <div class="cs-section-label">Axis Lock</div>
+        <div class="cs-row"><span class="cs-key"><kbd>X</kbd></span><span class="cs-desc">Lock / unlock X axis</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Y</kbd></span><span class="cs-desc">Lock / unlock Y axis</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Z</kbd></span><span class="cs-desc">Lock / unlock Z axis</span></div>
+
+        <div class="cs-section-label">Part — Visibility &amp; Selection</div>
+        <div class="cs-row"><span class="cs-key"><kbd>E</kbd></span><span class="cs-desc">Switch node profile (front &harr; side)</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>F</kbd></span><span class="cs-desc">Highlight part in Parts list</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>H</kbd></span><span class="cs-desc">Show / hide selected part</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>J</kbd></span><span class="cs-desc">Enable / disable selected part</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>L</kbd></span><span class="cs-desc">Lock / unlock selected part</span></div>
+
+        <div class="cs-section-label">Part — Mesh Options</div>
+        <div class="cs-row"><span class="cs-key"><kbd>M</kbd></span><span class="cs-desc">Toggle X-mirror</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>B</kbd></span><span class="cs-desc">Toggle subdivide</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>U</kbd></span><span class="cs-desc">Toggle round end</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>C</kbd></span><span class="cs-desc">Toggle chamfer</span></div>
+      </div>
+
+    </div>
+
+    <h2>Menus &amp; Context Menus</h2>
+
+    <div class="cheatsheet">
+
+      <!-- Menus: single-col -->
+      <div class="cs-section single">
+        <div class="cs-section-label">File Menu</div>
+        <div class="cs-row"><span class="cs-key"><kbd>Ctrl</kbd>+<kbd>N</kbd> New Window</span><span class="cs-desc">Open a new document window</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Ctrl</kbd>+<kbd>O</kbd> Open&hellip;</span><span class="cs-desc">Open a .ds3 file</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Ctrl</kbd>+<kbd>S</kbd> Save</span><span class="cs-desc">Save current document</span></div>
+        <div class="cs-row"><span class="cs-key">Save As&hellip;</span><span class="cs-desc">Save to a new file</span></div>
+        <div class="cs-row"><span class="cs-key">Save All</span><span class="cs-desc">Save all open documents</span></div>
+        <div class="cs-row"><span class="cs-key">Export as OBJ&hellip;</span><span class="cs-desc">Wavefront OBJ</span></div>
+        <div class="cs-row"><span class="cs-key">Export as GLB&hellip;</span><span class="cs-desc">glTF binary</span></div>
+        <div class="cs-row"><span class="cs-key">Export as FBX&hellip;</span><span class="cs-desc">Autodesk FBX</span></div>
+        <div class="cs-row"><span class="cs-key">Export as GLB and WAVs&hellip;</span><span class="cs-desc">GLB + per-bone WAV files</span></div>
+        <div class="cs-row"><span class="cs-key">Export as FBX and WAVs&hellip;</span><span class="cs-desc">FBX + per-bone WAV files</span></div>
+        <div class="cs-row"><span class="cs-key">Change Background Image&hellip;</span><span class="cs-desc">Set front/side reference image</span></div>
+        <div class="cs-row"><span class="cs-key">Erase Background Image</span><span class="cs-desc">Remove reference image</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Ctrl</kbd>+<kbd>Q</kbd> Quit</span><span class="cs-desc">Exit the application</span></div>
+
+        <div class="cs-section-label">View Menu</div>
+        <div class="cs-row"><span class="cs-key">Toggle Wireframe</span><span class="cs-desc">Show/hide wireframe overlay</span></div>
+        <div class="cs-row"><span class="cs-key">Toggle Rotation</span><span class="cs-desc">Start/stop auto rotation</span></div>
+        <div class="cs-row"><span class="cs-key">Toggle Color</span><span class="cs-desc">Color vs. monochrome render</span></div>
+
+        <div class="cs-section-label">Window Menu</div>
+        <div class="cs-row"><span class="cs-key">Parts</span><span class="cs-desc">Show the Parts panel</span></div>
+        <div class="cs-row"><span class="cs-key">Bones</span><span class="cs-desc">Show the Bones panel</span></div>
+        <div class="cs-row"><span class="cs-key">Animations</span><span class="cs-desc">Show the Animations panel</span></div>
+        <div class="cs-row"><span class="cs-key">Dialogs</span><span class="cs-desc">List and re-raise open dialogs</span></div>
+        <div class="cs-row"><span class="cs-key">Debug</span><span class="cs-desc">Open the debug log browser</span></div>
+
+        <div class="cs-section-label">Canvas Context Menu &nbsp;<span style="font-weight:400;text-transform:none;letter-spacing:0;">(right-click canvas in Select mode)</span></div>
+        <div class="cs-row"><span class="cs-key">Add&hellip;</span><span class="cs-desc">Switch to Add mode</span></div>
+        <div class="cs-row"><span class="cs-key">Undo / Redo</span><span class="cs-desc">Undo or redo last action</span></div>
+        <div class="cs-row"><span class="cs-key">Delete</span><span class="cs-desc">Delete selected nodes/edges</span></div>
+        <div class="cs-row"><span class="cs-key">Break</span><span class="cs-desc">Insert node into selected edge</span></div>
+        <div class="cs-row"><span class="cs-key">Reduce</span><span class="cs-desc">Reduce selected nodes</span></div>
+        <div class="cs-row"><span class="cs-key">Reverse</span><span class="cs-desc">Reverse selected edge direction</span></div>
+        <div class="cs-row"><span class="cs-key">Connect</span><span class="cs-desc">Connect two selected nodes</span></div>
+        <div class="cs-row"><span class="cs-key">Cut / Copy / Paste</span><span class="cs-desc">Clipboard operations</span></div>
+        <div class="cs-row"><span class="cs-key">H Flip / V Flip</span><span class="cs-desc">Flip selection horizontally / vertically</span></div>
+        <div class="cs-row"><span class="cs-key">Rotate 90D CW / CCW</span><span class="cs-desc">Rotate selection 90&deg;</span></div>
+        <div class="cs-row"><span class="cs-key">Rotate 90D Around Z-Axis</span><span class="cs-desc">Rotate side-profile nodes around Z</span></div>
+        <div class="cs-row"><span class="cs-key">Rotate 90D Around X-Axis</span><span class="cs-desc">Rotate main-profile nodes around X</span></div>
+        <div class="cs-row"><span class="cs-key">Switch XZ</span><span class="cs-desc">Swap X and Z coordinates</span></div>
+        <div class="cs-row"><span class="cs-key">Align To &rsaquo; Local Center</span><span class="cs-desc">Align to local center</span></div>
+        <div class="cs-row"><span class="cs-key">Align To &rsaquo; Local V / H Center</span><span class="cs-desc">Align to local vertical / horizontal center</span></div>
+        <div class="cs-row"><span class="cs-key">Align To &rsaquo; Global Center</span><span class="cs-desc">Align to global center</span></div>
+        <div class="cs-row"><span class="cs-key">Align To &rsaquo; Global V / H Center</span><span class="cs-desc">Align to global vertical / horizontal center</span></div>
+        <div class="cs-row"><span class="cs-key">Colorize &rsaquo; Blank / Auto Color</span><span class="cs-desc">Remove or auto-assign color</span></div>
+        <div class="cs-row"><span class="cs-key">Select All / Part / Unselect All</span><span class="cs-desc">Selection helpers</span></div>
+
+        <div class="cs-section-label">Parts List Context Menu</div>
+        <div class="cs-row"><span class="cs-key">Make group</span><span class="cs-desc">Group selected into a folder</span></div>
+        <div class="cs-row"><span class="cs-key">Ungroup</span><span class="cs-desc">Dissolve selected group</span></div>
+        <div class="cs-row"><span class="cs-key">Move To &rsaquo; Begin / End</span><span class="cs-desc">Jump to top or bottom of list</span></div>
+        <div class="cs-row"><span class="cs-key">Move To &rsaquo; Previous / Next</span><span class="cs-desc">Move one step up or down</span></div>
+        <div class="cs-row"><span class="cs-key">Convert to Model</span><span class="cs-desc">Change target to regular mesh</span></div>
+        <div class="cs-row"><span class="cs-key">Convert to Cut Face</span><span class="cs-desc">Use as custom cross-section</span></div>
+        <div class="cs-row"><span class="cs-key">Convert to Stitching Line</span><span class="cs-desc">Use as stitching line</span></div>
+        <div class="cs-row"><span class="cs-key">Delete</span><span class="cs-desc">Remove selected components</span></div>
+
+        <div class="cs-section-label">Bones List Context Menu</div>
+        <div class="cs-row"><span class="cs-key">Clear Assignments</span><span class="cs-desc">Remove edge assignments from bone</span></div>
+        <div class="cs-row"><span class="cs-key">Clear Chain Assignments</span><span class="cs-desc">Remove assignments from bone chain</span></div>
+        <div class="cs-row"><span class="cs-key"><kbd>Return</kbd> / <kbd>Enter</kbd></span><span class="cs-desc">Assign selected canvas edges to bone</span></div>
+      </div>
+
+    </div>
 
     <h2>Examples</h2>
 
-    <h3>Fruit &mdash; Banana</h3>
-    <h4>Key Steps</h4>
-    <img src="examples/banana.png" width="360" height="192" alt="Banana example" />
-    <ol>
-      <li>Draw five nodes on canvas in circle</li>
-      <li>Right click on the part from Parts list, then choose Convert to Cut Face</li>
-      <li>Draw several nodes on canvas in a tube shape</li>
-      <li>Double click the tube shape to select it in Parts list</li>
-      <li>Click the configure properties icon from Parts list</li>
-      <li>Select the Cut Face icon to fill the tube shape</li>
-    </ol>
-    <h4>Attachments</h4>
-    <ul>
-      <li><a href="examples/banana.ds3">banana.ds3</a></li>
-    </ul>
+    <div class="examples-grid">
 
-    <hr />
+      <div class="ex-card">
+        <img src="examples/banana.png" alt="Banana" />
+        <div class="ex-body">
+          <div class="ex-title">Fruit &mdash; Banana</div>
+          <ol class="ex-steps">
+            <li>Draw five nodes in a circle (cut face shape)</li>
+            <li>Right-click part &rarr; Convert to Cut Face</li>
+            <li>Draw a tube-shaped part on canvas</li>
+            <li>Double-click tube to select it in Parts list</li>
+            <li>Open part properties &rarr; select the Cut Face</li>
+          </ol>
+          <div class="ex-dl"><span>&#8595;</span><a href="examples/banana.ds3">banana.ds3</a></div>
+        </div>
+      </div>
 
-    <h3>Clothes &mdash; Hat</h3>
-    <h4>Key Steps</h4>
-    <img src="examples/hat.png" width="360" height="192" alt="Hat example" />
-    <ol>
-      <li>Draw five spines on canvas</li>
-      <li>Select all parts from Parts list</li>
-      <li>Right click and select Convert to Stitching Line</li>
-      <li>Right click again and select Make group</li>
-      <li>Click the configure properties icon from Parts list</li>
-      <li>Check box: Back closed</li>
-      <li>Update Target Segments: 7</li>
-    </ol>
-    <h4>Attachments</h4>
-    <ul>
-      <li><a href="examples/hat.ds3">hat.ds3</a></li>
-    </ul>
+      <div class="ex-card">
+        <img src="examples/hat.png" alt="Hat" />
+        <div class="ex-body">
+          <div class="ex-title">Clothes &mdash; Hat</div>
+          <ol class="ex-steps">
+            <li>Draw five spine parts on canvas</li>
+            <li>Select all &rarr; right-click &rarr; Convert to Stitching Line</li>
+            <li>Right-click &rarr; Make group</li>
+            <li>Open group properties &rarr; check Back closed</li>
+            <li>Set Target Segments to 7</li>
+          </ol>
+          <div class="ex-dl"><span>&#8595;</span><a href="examples/hat.ds3">hat.ds3</a></div>
+        </div>
+      </div>
 
-    <hr />
+      <div class="ex-card">
+        <img src="examples/dog.png" alt="Dog" />
+        <div class="ex-body">
+          <div class="ex-title">Animals &mdash; Dog</div>
+          <ol class="ex-steps">
+            <li>Photograph the dog from the front and side</li>
+            <li>File &rarr; Change Background Image &rarr; load both photos</li>
+            <li>Draw nodes tracing the reference image</li>
+            <li>Select all parts &rarr; open properties &rarr; choose texture</li>
+          </ol>
+          <div class="ex-dl"><span>&#8595;</span><a href="examples/dog.ds3">dog.ds3</a></div>
+        </div>
+      </div>
 
-    <h3>Animals &mdash; Dog</h3>
-    <h4>Key Steps</h4>
-    <img src="examples/dog.png" width="360" height="192" alt="Dog example" />
-    <ol>
-      <li>Take a front photo of dog</li>
-      <li>Take a side view of dog</li>
-      <li>Menu: File &raquo; Change Background Image&hellip; &raquo; Select both front and side images</li>
-      <li>Draw nodes according to the background reference image</li>
-      <li>Select all parts from Parts list</li>
-      <li>Click the configure properties icon from Parts list</li>
-      <li>Choose texture image</li>
-    </ol>
-    <h4>Attachments</h4>
-    <ul>
-      <li><a href="examples/dog.ds3">dog.ds3</a></li>
-    </ul>
+    </div>
 
-    <hr />
-
-    <h3>Others</h3>
-    <ul>
-      <li><a href="examples/fly.ds3">fly.ds3</a></li>
-      <li><a href="examples/knife.ds3">knife.ds3</a></li>
-      <li><a href="examples/screwdriver.ds3">screwdriver.ds3</a></li>
-    </ul>
-
-    <hr />
-
-    <h2>More Example Models</h2>
-    <p>Additional <code>.ds3</code> model files are available on the <a href="https://github.com/huxingyi/dust3d-test-models" target="_blank">dust3d-test-models</a> GitHub page. Download any file and open it via <strong>File &rarr; Open</strong> to explore it in Dust3D.</p>
+    <div class="ex-others">
+      <strong>More files</strong>
+      <ul>
+        <li><a href="examples/fly.ds3">fly.ds3</a></li>
+        <li><a href="examples/knife.ds3">knife.ds3</a></li>
+        <li><a href="examples/screwdriver.ds3">screwdriver.ds3</a></li>
+        <li>Additional models on <a href="https://github.com/huxingyi/dust3d-test-models" target="_blank">dust3d-test-models</a> &mdash; download and open via File &rarr; Open</li>
+      </ul>
+    </div>
   </div>
 
   <footer>
